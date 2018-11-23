@@ -109,42 +109,36 @@ void login(){
 
 
     FILE *loginDetails;
-
     char userNameFile[100];
     char passwordFile[100];
 
     loginDetails = fopen("loginDetails.txt", "r");
 
-    Login *login = malloc(sizeof(*login));
-
-
-    login->userName = malloc(sizeof(*login->userName));
-    login->password = malloc(sizeof(*login->password));
+    Login *loginAccount = malloc(sizeof(*loginAccount));
+    loginAccount->userName = malloc(sizeof(*loginAccount->userName));
+    loginAccount->password = malloc(sizeof(*loginAccount->password));
 
     printf("Enter in UserName: ");
     fgets(buffer, sizeof(buffer), stdin);
-    sscanf(buffer, "%s", login->userName);
+    sscanf(buffer, "%s", loginAccount->userName);
 
     printf("Enter in PassWord: ");
     fgets(buffer, sizeof(buffer), stdin);
-    sscanf(buffer, "s", login->password);
+    sscanf(buffer, "%s", loginAccount->password);
     
     //Check to see if the credntials are correct.
     while(!feof(loginDetails)){
         fscanf(loginDetails, "%s %s",userNameFile, passwordFile);
-        if((strcmp(userNameFile, login->userName)) == 0 && (strcmp(passwordFile, login->password)) == 0){
-            printf("Correct!\n");
-            break;
-        }else{
-            printf("Wrong\n");
-            printf("%s %s", userNameFile, passwordFile);
+        if((strcmp(userNameFile, loginAccount->userName)) == 0 && (strcmp(passwordFile, loginAccount->password)) == 0){
+            printf("Thanks For Banking with Us!\n");
             break;
         }
+
     }
 
-    free(login);
-    free(login->userName);
-    free(login->password);
+    free(loginAccount);
+    free(loginAccount->userName);
+    free(loginAccount->password);
 
     return;
 }
